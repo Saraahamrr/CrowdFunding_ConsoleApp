@@ -1,5 +1,6 @@
 
 def user_menu():
+    print("-----------------------------------------------")
     print("User LoggedIn Successfully!")
     print("-----------------------------------------------")
     print("Please select an option from the menu below:")
@@ -16,29 +17,36 @@ def user_menu():
     print("7. Exit")
 
 
-    option = input("Enter your choice: ")
+    choice = input("Enter your choice: ")
 
-while True:
-    if option == "1":
-        create_project()
-    elif option == "2":
-        view_all_projects()
-    elif option == "3":
-        view_project()
-    elif option == "4":
-        update_project()
-    elif option == "5":
-        delete_project()
-    elif option == "6":
-        search_project()
-    elif option == "7":
-        break
-    elif option == "8":
-        print("Thank you for using the Fundraising Projects Console App!")
-        exit()
-    else:
-        print("Invalid option. Please enter a number from 1 to 6.")
-        continue
+    while True:
+        if choice == "1":
+            create_project()
+        elif choice == "2":
+            view_all_projects()
+        elif choice == "3":
+            view_project()
+        elif choice == "4":
+            update_project()
+        elif choice == "5":
+            delete_project()
+        elif choice == "6":
+            search_project()
+        elif choice == "7":
+            print("-----------------------------------------------")
+            print("Going Back to Main Menu")
+            print("-----------------------------------------------")
+            break
+        elif choice == "8":
+            print("-----------------------------------------------")
+            print("Thank you for using the Fundraising Projects Console App!")
+            print("-----------------------------------------------")
+            exit()
+        else:
+            print("-----------------------------------------------")
+            print("Invalid option. Please enter a number from 1 to 6.")
+            print("-----------------------------------------------")
+            continue
 
 user_menu()
 
