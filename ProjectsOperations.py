@@ -266,3 +266,47 @@ def delete_project(user_id):
     else:
         print("Project not found!")
         return
+    
+
+def search_project(user_id):
+    project_date= input("Enter project date: ")#stting
+    while not isValid_date(project_date):
+        project_date = input("Enter project date: ")
+
+    try:
+        with open("projects.json", "r") as file:
+            projects_list = json.load(file)
+    except:
+        projects_list = []
+    search_res = [
+        project for project in projects_list
+        if project["user_id"] == user_id
+        and datetime.strptime(project["project_start_date"],"%d/%m/%Y" ) <= datetime.strptime(project["project_end_date"],"%d/%m/%Y" )
+    ]
+    print(search_res)
+    
+    if search_res == []:
+            print("No projects found!")
+            return
+    else :
+        for project in search_res:
+                print("\nExisting Projects:\n")
+                print("-----------------------------------------------------------------------------------")
+                print(f"-----------------------Project ID: {project['project_id']}------------------------")
+                print(f"Project Name: {project['project_name']}")
+                print(f"Project Description: {project['project_description']}")
+                print(f"Project Target: {project['project_target']}")
+                print(f"Project Start Date: {project['project_start_date']}")
+                print(f"Project End Date: {project['project_end_date']}")
+                print("-----------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------")
+                print("would you like to go back to menu now?")
+        login_option = input("YES/NO...: " )
+        if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+                print("--------------------------------")
+                print("Going back to your Menu")
+                print("--------------------------------")
+                from userMenu import user_menu
+                user_menu(user_id)
+        else:
+            pass

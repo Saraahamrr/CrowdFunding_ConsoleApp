@@ -1,6 +1,7 @@
 from vaildations import *
 import json
 import bcrypt
+import getpass
 
 def register():
     print("Register")
@@ -13,16 +14,20 @@ def register():
         username = input("Username: ")
     while not isValid_username(username):
         username = input("Username: ")
-    password = input("Password: ")
-    while not isValid_password(password):
-        password = input("Password: ")
+
+    password = getpass.getpass("Password: ")
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    while not isValid_password(password):
+        password = getpass.getpass("Password: ")
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
     email = input("Email: ")
     while email_exists(email):
         print("Email already exists. Please enter a different email.")
         email = input("Email: ")
     while not isValid_email(email):
         email = input("Email: ")
+
     phone = input("Phone: ")
     while not isValid_phone(phone):
         phone = input("Phone: ")
@@ -71,7 +76,7 @@ def login():
         print("--------------------------------")
         print("Please enter your details below:")
         username = input("Enter username: ")
-        password = input("Enter Password: ")
+        password = getpass.getpass("Password: ")
 
         try:
             with open("users.json", "r") as file:
