@@ -3,7 +3,11 @@ from vaildations import *
 import json
 from datetime import datetime
 
-def create_project():
+def create_project(user_id):
+    print("Create a new project")
+    print("--------------------")
+    print("Please submit your project details below:")
+    print("------------------------------------------")
     project_name = input("Enter project name: ")
     while project_name_exists(project_name):
         project_name = input("Enter project name: ")
@@ -32,6 +36,7 @@ def create_project():
         "project_target": project_target,
         "project_start_date": project_start_date,
         "project_end_date": project_end_date,
+        "user_id": user_id
     }
 
     try:
@@ -50,17 +55,52 @@ def create_project():
     print("-----------------------------------------------")
 
     from userMenu import user_menu
-    user_menu()
+    user_menu(user_id)
 
-def view_all_projects():
+def view_all_projects(user_id):
     try:
         with open("projects.json", "r") as file:
             projects_list = json.load(file)
     except:
         projects_list = []
 
+    user_projects = [project for project in projects_list if project["user_id"] == user_id]
+    if user_projects == []:
+        print("No projects found!")
+        return
+    else :
+        for project in user_projects:
+            print("\nExisting Projects:\n")
+            print("-----------------------------------------------------------------------------------")
+            print(f"-----------------------Project ID: {project['project_id']}------------------------")
+            print(f"Project Name: {project['project_name']}")
+            print(f"Project Description: {project['project_description']}")
+            print(f"Project Target: {project['project_target']}")
+            print(f"Project Start Date: {project['project_start_date']}")
+            print(f"Project End Date: {project['project_end_date']}")
+            print("-----------------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------------")
+        print("would you like to go back to menu now?")
+        login_option = input("YES/NO...: " )
+        if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+            print("--------------------------------")
+            print("Going back to your Menu")
+            print("--------------------------------")
+            from userMenu import user_menu
+            user_menu(user_id)
+        else:
+            pass
+
+def view_project(user_id):
+    project_name = input("Enter project name: ")
+    try:
+        with open("projects.json", "r") as file:
+            projects_list = json.load(file)
+    except:
+        projects_list = []
+    
     for project in projects_list:
-        print("\nExisting Projects:\n")
+        print("\n Your Projects:\n")
         print("-----------------------------------------------------------------------------------")
         print(f"-----------------------Project ID: {project['project_id']}------------------------")
         print(f"Project Name: {project['project_name']}")
@@ -77,10 +117,7 @@ def view_all_projects():
         print("Going back to your Menu")
         print("--------------------------------")
         from userMenu import user_menu
-        user_menu()
+        user_menu(user_id)
     else:
         pass
-  
-
-
 

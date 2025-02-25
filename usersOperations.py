@@ -86,8 +86,10 @@ def login():
             if check_password(password, user["password"]) :
                 print("--------------------------------")
                 print(f"Welcome, {user['username']} !")  
+                user_id = user["user_id"]
                 from userMenu import user_menu
-                user_menu()  
+                user_menu(user_id) 
+                return user_id
             else :
                 print("Incorrect password!")
                 return

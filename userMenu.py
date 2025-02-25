@@ -1,6 +1,7 @@
 from ProjectsOperations import *
+from usersOperations import login
 
-def user_menu():
+def user_menu(user_id):
     print("-----------------------------------------------")
     print("Please select an option from the menu below:")
     print("-----------------------------------------------")
@@ -20,17 +21,17 @@ def user_menu():
 
     while True:
         if choice == "1":
-            create_project()
+            create_project(user_id)
         elif choice == "2":
-            view_all_projects()
+            view_all_projects(user_id)
         elif choice == "3":
-            view_project()
+            view_project(user_id)
         elif choice == "4":
-            update_project()
+            update_project(user_id)
         elif choice == "5":
-            delete_project()
+            delete_project(user_id)
         elif choice == "6":
-            search_project()
+            search_project(user_id)
         elif choice == "7":
             print("-----------------------------------------------")
             print("Going Back to Main Menu")
@@ -47,6 +48,4 @@ def user_menu():
             print("Invalid option. Please enter a number from 1 to 6.")
             print("-----------------------------------------------")
             return
-
-user_menu()
 
