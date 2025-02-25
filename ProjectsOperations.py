@@ -125,3 +125,115 @@ def view_project(user_id):
         print("Project not found!")
         return
 
+def update_project(user_id):
+    project_name = input("Enter project name: ")
+    try:
+        with open("projects.json", "r") as file:
+            projects_list = json.load(file)
+    except:
+        projects_list = []
+
+    project = next((project for project in projects_list if project["project_name"] == project_name and project["user_id"] == user_id), None)
+    if project :
+        print("Update Project")
+        print("--------------")
+        print("---------------------------------------------------")
+        print("1. Update project name")
+        print("2. Update project description")
+        print("3. Update project target")
+        print("4. Update project start date")
+        print("5. Update project end date")
+        print("---------------------------------------------------")
+        option = input("Enter your choice: ")
+        print("---------------------------------------------------")
+        if option == "1":
+                new_name = input("Enter new project name: ")
+                while project_name_exists(new_name): 
+                    new_name = input("Project name already exists. Please enter a different name: ")
+                while not isValid_project_name(new_name):  
+                    new_name = input("Invalid project name. Please enter a valid name: ")
+                project["project_name"] = new_name
+                print(f"Project name updated to: {new_name}")
+            
+        elif option == "2":
+                new_description = input("Enter new project description: ")
+                while not isValid_project_description(new_description):  
+                    new_description = input("Invalid project description. Please enter a valid description: ")
+                project["project_description"] = new_description
+                print(f"Project description updated to: {new_description}")
+            
+        elif option == "3":
+                new_target = input("Enter new project target: ")
+                while not isValid_target(new_target):  # Validate project target
+                    new_target = input("Invalid project target. Please enter a valid target: ")
+                project["project_target"] = int(new_target)
+                print(f"Project target updated to: {new_target}")
+            
+        elif option == "4":
+                new_start_date = input("Enter new project start date (YYYY-MM-DD): ")
+                while not isvalid_project_dates(new_start_date, project["project_end_date"]):  # Validate start date
+                    new_start_date = input("Invalid start date. Please enter a valid start date: ")
+                project["project_start_date"] = new_start_date
+                print(f"Project start date updated to: {new_start_date}")
+            
+        elif option == "5":
+                new_end_date = input("Enter new project end date (YYYY-MM-DD): ")
+                while not isvalid_project_dates(project["project_start_date"], new_end_date):  # Validate end date
+                    new_end_date = input("Invalid end date. Please enter a valid end date: ")
+                project["project_end_date"] = new_end_date
+                print(f"Project end date updated to: {new_end_date}")
+            
+        else:
+                print("Invalid option. No updates were made.")
+                return
+            
+        with open("projects.json", "w") as file:
+                json.dump(projects_list, file)
+
+        print("-----------------------------------------------")
+        print("Project updated successfully.")
+        print("-----------------------------------------------")
+        print("would you like to go back to menu now?")
+        login_option = input("YES/NO...: " )
+        if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+            print("--------------------------------")
+            print("Going back to your Menu")
+            print("--------------------------------")
+            from userMenu import user_menu
+            user_menu(user_id)
+        else:
+            pass
+    else:
+        print("Project not found!")
+        return
+    
+def delete_project(user_id):
+    project_name = input("Enter project name: ")
+    try:
+        with open("projects.json", "r") as file:
+            projects_list = json.load(file)
+    except:
+        projects_list = []
+
+    project = next((project for project in projects_list if project["project_name"] == project_name and project["user_id"] == user_id), None)
+    if project :
+        projects_list.remove(project)
+        with open("projects.json", "w") as file:
+            json.dump(projects_list, file)
+
+        print("-----------------------------------------------")
+        print("Project deleted successfully.")
+        print("-----------------------------------------------")
+        print("would you like to go back to menu now?")
+        login_option = input("YES/NO...: " )
+        if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+            print("--------------------------------")
+            print("Going back to your Menu")
+            print("--------------------------------")
+            from userMenu import user_menu
+            user_menu(user_id)
+        else:
+            pass
+    else:
+        print("Project not found!")
+        return

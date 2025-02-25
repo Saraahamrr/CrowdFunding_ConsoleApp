@@ -1,8 +1,8 @@
 [
     {
         "project_name": "sarah",
-        "project_description": "sarah is here to test",
-        "project_target": 155,
+        "project_description": "sarah updated this desc",
+        "project_target": 5000,
         "project_start_date": "24/10/1994",
         "project_end_date": "24/10/2025",
         "project_id": 1,
