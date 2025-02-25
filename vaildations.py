@@ -1,6 +1,7 @@
 import re
 import json
 import bcrypt
+from datetime import datetime
 
 def isValid_email(email):
     if email.count("@") != 1 or not email.endswith(".com"):
@@ -62,3 +63,48 @@ def isValid_project_name(project_name):
     else:
         print("Project name must contain at least 5 characters.")
     return False
+def project_name_exists(project_name):
+    try:
+        with open("projects.json", "r") as file:
+            projects_list = json.load(file)
+    except:
+        return False
+    for project in projects_list:
+        if project["project_name"] == project_name:
+            return True
+    return False
+
+def isValid_project_description(project_description):
+    if re.match(r"^[a-zA-Z0-9\s\.,;!?-]{10,}$", project_description):
+        return True
+    else:
+        print("Project description must contain at least 10 characters.")
+    return False
+
+def isValid_target(target):
+    if target.isdigit():
+        return True
+    else:
+        print("Invalid target. Please enter a number.")
+        return False
+
+def isValid_date(date):
+    try:
+        datetime.strptime(date, "%d/%m/%Y")
+        return True
+    except:
+        print("Invalid date. Please enter a date in the format dd/mm/yyyy.")
+        return False
+
+def isvalid_project_dates(start_date, end_date):
+
+    if not isValid_date(start_date) or not isValid_date(end_date):
+        return False
+    
+    start_date = datetime.strptime(start_date, "%d/%m/%Y")
+    end_date = datetime.strptime(end_date, "%d/%m/%Y")
+
+    if start_date > end_date:
+        print("Start date must be before end date.")
+        return False
+    return True 

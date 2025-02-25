@@ -1,3 +1,4 @@
+from ProjectsOperations import *
 
 def user_menu():
     print("-----------------------------------------------")
@@ -45,7 +46,7 @@ def user_menu():
             print("-----------------------------------------------")
             print("Invalid option. Please enter a number from 1 to 6.")
             print("-----------------------------------------------")
-            continue
+            return
 
 user_menu()
 
