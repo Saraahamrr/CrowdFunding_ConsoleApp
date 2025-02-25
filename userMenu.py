@@ -1,8 +1,6 @@
 
 def user_menu():
     print("-----------------------------------------------")
-    print("User LoggedIn Successfully!")
-    print("-----------------------------------------------")
     print("Please select an option from the menu below:")
     print("-----------------------------------------------")
     print("-----------------------------------------------")
@@ -12,9 +10,9 @@ def user_menu():
     print("3. View a project")
     print("4. Update a project")
     print("5. Delete a project")
-    print("5. Search a project")
-    print("6. back")
-    print("7. Exit")
+    print("6. Search a project")
+    print("7. back")
+    print("8. Exit")
 
 
     choice = input("Enter your choice: ")
@@ -36,7 +34,8 @@ def user_menu():
             print("-----------------------------------------------")
             print("Going Back to Main Menu")
             print("-----------------------------------------------")
-            break
+            from app import app
+            app()
         elif choice == "8":
             print("-----------------------------------------------")
             print("Thank you for using the Fundraising Projects Console App!")
