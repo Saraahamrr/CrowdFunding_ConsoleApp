@@ -99,25 +99,29 @@ def view_project(user_id):
     except:
         projects_list = []
     
-    for project in projects_list:
-        print("\n Your Projects:\n")
-        print("-----------------------------------------------------------------------------------")
-        print(f"-----------------------Project ID: {project['project_id']}------------------------")
-        print(f"Project Name: {project['project_name']}")
-        print(f"Project Description: {project['project_description']}")
-        print(f"Project Target: {project['project_target']}")
-        print(f"Project Start Date: {project['project_start_date']}")
-        print(f"Project End Date: {project['project_end_date']}")
-        print("-----------------------------------------------------------------------------------")
-        print("-----------------------------------------------------------------------------------")
-    print("would you like to go back to menu now?")
-    login_option = input("YES/NO...: " )
-    if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
-        print("--------------------------------")
-        print("Going back to your Menu")
-        print("--------------------------------")
-        from userMenu import user_menu
-        user_menu(user_id)
+    project = next((project for project in projects_list if project["project_name"] == project_name and project["user_id"] == user_id), None)
+    if project :
+            print("\n Your Project\n")
+            print("-----------------------------------------------------------------------------------")
+            print(f"-----------------------Project ID: {project['project_id']}------------------------")
+            print(f"Project Name: {project['project_name']}")
+            print(f"Project Description: {project['project_description']}")
+            print(f"Project Target: {project['project_target']}")
+            print(f"Project Start Date: {project['project_start_date']}")
+            print(f"Project End Date: {project['project_end_date']}")
+            print("-----------------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------------")
+            print("would you like to go back to menu now?")
+            login_option = input("YES/NO...: " )
+            if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+                print("--------------------------------")
+                print("Going back to your Menu")
+                print("--------------------------------")
+                from userMenu import user_menu
+                user_menu(user_id)
+            else:
+                pass
     else:
-        pass
+        print("Project not found!")
+        return
 
