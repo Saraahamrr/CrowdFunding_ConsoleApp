@@ -22,7 +22,7 @@ def email_exists(email):
 
 def isValid_phone(phone):
 
-    if re.match(r"^01[0-9]{9}$", phone):      
+    if re.match(r"^201[0-9]{9}$", phone):      
         return True
     else:
         print("Invalid phone number. Please enter a valid phone number.")

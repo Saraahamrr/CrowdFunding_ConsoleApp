@@ -9,12 +9,13 @@ def user_menu(user_id):
 
     print("1. Create a new project")
     print("2. View all projects")
-    print("3. View a project")
-    print("4. Update a project")
-    print("5. Delete a project")
-    print("6. Search a project")
-    print("7. back")
-    print("8. Exit")
+    print("3. View my projects")
+    print("4. View a project")
+    print("5. Update a project")
+    print("6. Delete a project")
+    print("7. Search a project")
+    print("8. back")
+    print("9. Exit")
 
 
     choice = input("Enter your choice: ")
@@ -25,20 +26,22 @@ def user_menu(user_id):
         elif choice == "2":
             view_all_projects(user_id)
         elif choice == "3":
-            view_project(user_id)
+            view_my_projects(user_id)
         elif choice == "4":
-            update_project(user_id)
+            view_project(user_id)
         elif choice == "5":
-            delete_project(user_id)
+            update_project(user_id)
         elif choice == "6":
-            search_project(user_id)
+            delete_project(user_id)
         elif choice == "7":
+            search_project(user_id)
+        elif choice == "8":
             print("-----------------------------------------------")
             print("Going Back to Main Menu")
             print("-----------------------------------------------")
             from app import app
             app()
-        elif choice == "8":
+        elif choice == "9":
             print("-----------------------------------------------")
             print("Thank you for using the Fundraising Projects Console App!")
             print("-----------------------------------------------")
