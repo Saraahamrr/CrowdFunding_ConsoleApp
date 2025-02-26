@@ -5,7 +5,7 @@ from datetime import datetime
 
 def isValid_email(email):
     if email.count("@") != 1 or not email.endswith(".com"):
-        print("invalid email")
+        print("invalid email must contain @ and end with .com")
         return False
     else:
         return True
