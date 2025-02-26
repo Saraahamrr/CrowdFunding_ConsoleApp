@@ -48,7 +48,7 @@ def user_menu(user_id):
             exit()
         else:
             print("-----------------------------------------------")
-            print("Invalid option. Please enter a number from 1 to 6.")
+            print("Invalid option. Please enter a number from 1 to 9.")
             print("-----------------------------------------------")
             return
 
