@@ -58,38 +58,43 @@ def create_project(user_id):
     user_menu(user_id)
 
 def view_my_projects(user_id):
-    try:
-        with open("projects.json", "r") as file:
-            projects_list = json.load(file)
-    except:
-        projects_list = []
+        try:
+            with open("projects.json", "r") as file:
+                projects_list = json.load(file)
+        except:
+            projects_list = []
 
-    user_projects = [project for project in projects_list if project["user_id"] == user_id]
-    if user_projects == []:
-        print("No projects found!")
-        return
-    else :
-        for project in user_projects:
-            print("\nExisting Projects:\n")
-            print("-----------------------------------------------------------------------------------")
-            print(f"-----------------------Project ID: {project['project_id']}------------------------")
-            print(f"Project Name: {project['project_name']}")
-            print(f"Project Description: {project['project_description']}")
-            print(f"Project Target: {project['project_target']}")
-            print(f"Project Start Date: {project['project_start_date']}")
-            print(f"Project End Date: {project['project_end_date']}")
-            print("-----------------------------------------------------------------------------------")
-            print("-----------------------------------------------------------------------------------")
-        print("would you like to go back to menu now?")
-        login_option = input("YES/NO...: " )
-        if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
-            print("--------------------------------")
-            print("Going back to your Menu")
-            print("--------------------------------")
-            from userMenu import user_menu
-            user_menu(user_id)
-        else:
-            pass
+        user_projects = [project for project in projects_list if project["user_id"] == user_id]
+        if user_projects == []:
+                print("No projects found!")
+                print("--------------------------------")
+                print("Going back to your Menu")
+                print("--------------------------------")
+                from userMenu import user_menu
+                user_menu(user_id)
+
+        else :
+            for project in user_projects:
+                print("\nExisting Projects:\n")
+                print("-----------------------------------------------------------------------------------")
+                print(f"-----------------------Project ID: {project['project_id']}------------------------")
+                print(f"Project Name: {project['project_name']}")
+                print(f"Project Description: {project['project_description']}")
+                print(f"Project Target: {project['project_target']}")
+                print(f"Project Start Date: {project['project_start_date']}")
+                print(f"Project End Date: {project['project_end_date']}")
+                print("-----------------------------------------------------------------------------------")
+                print("-----------------------------------------------------------------------------------")
+            print("would you like to go back to menu now?")
+            login_option = input("YES/NO...: " )
+            if login_option == "YES" or login_option == "yes" or login_option == "y" or login_option == "Y":
+                print("--------------------------------")
+                print("Going back to your Menu")
+                print("--------------------------------")
+                from userMenu import user_menu
+                user_menu(user_id)
+            else:
+                pass
 
 def view_all_projects(user_id):
     try:
